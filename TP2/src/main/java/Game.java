@@ -1,4 +1,5 @@
 import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
@@ -16,7 +17,8 @@ public class Game {
     private Arena arena=null;
 
    Game(){
-       this.arena=new Arena(10,10);
+       this.arena=new Arena(100,100);
+
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();
             //object type screen controls, controls the panels and then render them
@@ -33,7 +35,8 @@ public class Game {
     }
     private void draw() throws IOException{
         screen.clear();
-        this.arena.draw(screen);
+        screen.doResizeIfNecessary();
+        this.arena.draw(screen.newTextGraphics());
         screen.refresh();
 
     }
