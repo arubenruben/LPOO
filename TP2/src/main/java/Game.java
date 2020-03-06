@@ -51,12 +51,18 @@ public class Game {
            else if(key.getKeyType()== KeyType.EOF){
                break;
            }
-           else
-               processKey(key);
+           else {
+               try {
+                   processKey(key);
+               } catch (Exception e) {
+                   System.out.println("End");
+                   screen.close();
+               }
+           }
        }
 
     }
-    private void processKey(KeyStroke key) {
+    private void processKey(KeyStroke key) throws Exception {
         this.arena.processKey(key);
     }
 

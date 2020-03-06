@@ -15,6 +15,7 @@ public class Arena {
     private Hero hero;
     private List<Wall> walls;
     private List<Coin> coins;
+    private List<Monster>monsters;
 
     public Arena(int width, int height) {
         this.width = width;
@@ -22,7 +23,29 @@ public class Arena {
         hero=new Hero(10,10);
         this.walls=createWalls();
         this.coins=createCoins();
+        this.monsters=createMonsters();
 
+    }
+
+    private List<Monster> createMonsters() {
+        Random random = new Random();
+        ArrayList<Monster> monsters = new ArrayList<>();
+        for (int i = 0; i < 5; i++){
+            int monsterX=random.nextInt(width - 2) + 1;
+            int monsterY=random.nextInt(height - 2) + 1;
+            Position positionTemp=new Position(monsterX,monsterY);
+
+            if(!positionTemp.equals(this.hero.getPosition())){
+                for(Monster monster:monsters){
+                    if(monster.position.equals(positionTemp))
+                        continue;
+                }
+                monsters.add(new Monster(random.nextInt(width - 2) + 1, random.nextInt(height - 2) + 1));
+            }else{
+                continue;
+            }
+        }
+        return monsters;
     }
 
     private List<Wall> createWalls() {
@@ -78,7 +101,7 @@ public class Arena {
         this.height = height;
     }
 
-    public void processKey(KeyStroke key) {
+    public void processKey(KeyStroke key) throws Exception {
 
         switch (key.getKeyType()){
 
@@ -102,12 +125,26 @@ public class Arena {
 
                 break;
         }
+        this.moveMonsters();
     }
 
-    public void moveHero(Position position) {
+    public void moveHero(Position position) throws Exception {
+
+        if(verifyMonsterCollisions()){
+            throw new Exception();
+        }
         if (canHeroMove(position)){
             hero.setPosition(position);
             retrieveCoins();
+        }
+        if(verifyMonsterCollisions()){
+            throw new Exception();
+        }
+    }
+
+    private void moveMonsters(){
+        for(Monster monster:monsters){
+            monster.moveMonster(this.height,this.width);
         }
     }
 
@@ -130,6 +167,9 @@ public class Arena {
         for(Coin coin:coins){
             coin.draw(graphics);
         }
+        for(Monster monster:monsters){
+            monster.draw(graphics);
+        }
     }
 
     private void retrieveCoins(){
@@ -144,6 +184,15 @@ public class Arena {
         //Reference update
         this.coins=auxCoinsList;
     }
+    private boolean verifyMonsterCollisions(){
 
+        for(Monster monster:monsters){
+            if(monster.position.equals(this.hero.getPosition()))
+                return true;
+        }
 
+        return false;
+    }
 }
+
+
