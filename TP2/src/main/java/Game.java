@@ -17,7 +17,7 @@ public class Game {
     private Arena arena=null;
 
    Game(){
-       this.arena=new Arena(100,100);
+       this.arena=new Arena(20,20);
 
         try {
             Terminal terminal = new DefaultTerminalFactory().createTerminal();

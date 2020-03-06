@@ -5,18 +5,16 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
-public class Hero {
-
-    private Position position;
+public class Hero extends Element{
 
     Hero(int x, int y){
-        this.position=new Position(x,y);
+        super(x,y);
     }
+    @Override
     public void draw(TextGraphics graphics) {
         graphics.setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
         graphics.enableModifiers(SGR.BOLD);
         graphics.putString(new TerminalPosition(position.getX(), position.getY()), "X");
-
     }
 
     public Position moveUp() {
