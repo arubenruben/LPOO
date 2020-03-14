@@ -65,7 +65,7 @@ public class ListAggregatorTest {
                 this.typeOfTest=typeOfTest;
             }
             @Override
-            public List<Integer> deduplicate() {
+            public List<Integer> deduplicate(IListSorter listSorter) {
                 if(this.typeOfTest==0){
 
                     List<Integer> listAux=new ArrayList<>();

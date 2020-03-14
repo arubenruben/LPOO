@@ -60,7 +60,7 @@ public class ListAggregator {
      */
     public int distinct(IListDeduplicator deduplicator) {
 
-        List<Integer> distinct = deduplicator.deduplicate();
+        List<Integer> distinct = deduplicator.deduplicate(new ListSorter(list));
 
         return distinct.size();
     }
