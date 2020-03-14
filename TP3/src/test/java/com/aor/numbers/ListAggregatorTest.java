@@ -59,20 +59,49 @@ public class ListAggregatorTest {
 
     @Test
     public void distinct() {
+        class Stub implements IListDeduplicator{
+            int typeOfTest;
+            Stub(int typeOfTest){
+                this.typeOfTest=typeOfTest;
+            }
+            @Override
+            public List<Integer> deduplicate() {
+                if(this.typeOfTest==0){
+
+                    List<Integer> listAux=new ArrayList<>();
+                    listAux.add(1);
+                    listAux.add(2);
+                    listAux.add(4);
+                    listAux.add(5);
+
+                    return  listAux;
+
+                }else{
+
+                    List<Integer> listAux=new ArrayList<>();
+                    listAux.add(1);
+                    listAux.add(2);
+                    listAux.add(4);
+
+                    return  listAux;
+                }
+            }
+        }
+
         helper();
 
         ListAggregator aggregator = new ListAggregator(list);
 
-        int distinct = aggregator.distinct();
+        int distinct = aggregator.distinct(new Stub(0));
 
         assertEquals(4, distinct);
 
         //Ex5
         ListAggregator aggregatorBugReport5 = new ListAggregator(this.bugReport5);
 
-        int distinctBugReport5 = aggregatorBugReport5.distinct();
+        int distinctBugReport5 = aggregatorBugReport5.distinct(new Stub(1));
 
-        assertEquals(3, distinct);
+        assertEquals(3, distinctBugReport5);
     }
 
     @Before
