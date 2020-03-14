@@ -11,6 +11,8 @@ import static org.junit.Assert.*;
 public class ListAggregatorTest {
     List<Integer> list;
     List<Integer> bugReport4;
+    List<Integer> bugReport5;
+
     @Test
     public void sum() {
         helper();
@@ -64,6 +66,13 @@ public class ListAggregatorTest {
         int distinct = aggregator.distinct();
 
         assertEquals(4, distinct);
+
+        //Ex5
+        ListAggregator aggregatorBugReport5 = new ListAggregator(this.bugReport5);
+
+        int distinctBugReport5 = aggregatorBugReport5.distinct();
+
+        assertEquals(3, distinct);
     }
 
     @Before
@@ -79,6 +88,12 @@ public class ListAggregatorTest {
         this.bugReport4.add(-1);
         this.bugReport4.add(-4);
         this.bugReport4.add(-5);
+
+        this.bugReport5=new ArrayList<>();
+        this.bugReport5.add(1);
+        this.bugReport5.add(2);
+        this.bugReport5.add(4);
+        this.bugReport5.add(2);
 
         return;
     }
