@@ -11,10 +11,12 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 public class ListAggregatorTest {
-    private List <Integer> list;
-    private ListDeduplicator stubDeduplicator;
-    private List<Integer> expected;
-    private IListDeduplicator deduplicator;
+    List <Integer> list;
+    ListDeduplicator stubDeduplicator;
+    List<Integer> expected;
+    IListDeduplicator deduplicator;
+    IListSorter sorter;
+    List <Integer>sorted;
 
     @Test
     public void sum() {
@@ -52,7 +54,7 @@ public class ListAggregatorTest {
         helper();
         ListAggregator aggregator = new ListAggregator(list);
 
-        int distinct = aggregator.distinct(deduplicator);
+        int distinct = aggregator.distinct(deduplicator,this.sorter);
 
         assertEquals(3, distinct);
     }
@@ -72,8 +74,18 @@ public class ListAggregatorTest {
         this.expected.add(2);
         this.expected.add(4);
 
+        this.sorted=new ArrayList<>();
+        this.sorted.add(1);
+        this.sorted.add(2);
+        this.sorted.add(2);
+        this.sorted.add(4);
+
+
         this.deduplicator = Mockito.mock(IListDeduplicator.class);
-        Mockito.when(deduplicator.deduplicate()).thenReturn(this.expected);
+        this.sorter = Mockito.mock(IListSorter.class);
+        Mockito.when(sorter.sort()).thenReturn(this.sorted);
+
+        Mockito.when(deduplicator.deduplicate(this.sorter)).thenReturn(this.expected);
 
     }
 }
