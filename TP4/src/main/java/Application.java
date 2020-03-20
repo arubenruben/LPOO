@@ -9,6 +9,8 @@ public class Application {
         areaAggregator.addShape(new Circle(5));
         areaAggregator.addShape(new Circle(5));
         areaAggregator.addShape(new Square(5));
+        areaAggregator.addShape(new Triangle(5,5));
+
 
         System.out.println(stringOutputter.output());
         System.out.println(xmlOutputter.output());

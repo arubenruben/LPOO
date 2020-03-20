@@ -1,6 +1,6 @@
 
 
-public class Elipse extends Shape {
+public class Elipse implements AreaShape {
 
     private final double xRadius;
     private final double yRadius;
@@ -17,5 +17,15 @@ public class Elipse extends Shape {
 
     public double getyRadius() {
         return yRadius;
+    }
+
+    @Override
+    public double getArea() {
+        return Math.PI* this.xRadius*this.yRadius;
+    }
+
+    @Override
+    public String draw() {
+        return "Elipse";
     }
 }
