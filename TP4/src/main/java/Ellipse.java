@@ -1,11 +1,11 @@
 
 
-public class Elipse implements AreaShape {
+public class Ellipse implements AreaShape {
 
     private final double xRadius;
     private final double yRadius;
 
-    Elipse(double xRadius, double yRadius){
+    Ellipse(double xRadius, double yRadius){
         super();
         this.xRadius=xRadius;
         this.yRadius=yRadius;
