@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="factory.FactoryTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-06-15T09:51:23" hostname="DESKTOP-6I8DS43" time="0.005">
+  <properties/>
+  <testcase name="ferengiStartClosed" classname="factory.FactoryTest" time="0.004"/>
+  <testcase name="ferengiAlreadyOpened" classname="factory.FactoryTest" time="0.0"/>
+  <testcase name="romulan" classname="factory.FactoryTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
